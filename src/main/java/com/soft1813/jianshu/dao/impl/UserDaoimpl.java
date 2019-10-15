@@ -21,4 +21,19 @@ public class UserDaoimpl implements UserDao {
     public List<Entity> findAll() throws SQLException {
         return Db.use().query("SELECT*FROM t_user ORDER BY id DESC");
     }
+
+    @Override
+    public int insertUser(User user) throws SQLException {
+        long id = Db.use().insertForGeneratedKey(
+                Entity.create("t_user")
+                        .set("account", user.getAccount())
+                        .set("password", user.getPassword())
+                        .set("nickname", user.getNickname())
+                        .set("avatar", user.getAvatar())
+                        .set("address", user.getAddress())
+                        .set("join_date",user.getJoinDate())
+                        .set("description", user.getDescription())
+        );
+        return (int) id;
+    }
 }

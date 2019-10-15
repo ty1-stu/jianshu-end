@@ -21,5 +21,9 @@ public interface UserDao {
      * @throws SQLException
      */
    List<Entity> findAll() throws SQLException;
+/*
+新增用户，返回自增主键
 
+ */
+  int insertUser(User user) throws SQLException;
 }

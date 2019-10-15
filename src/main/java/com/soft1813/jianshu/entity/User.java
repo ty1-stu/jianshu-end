@@ -1,6 +1,7 @@
 package com.soft1813.jianshu.entity;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 /**
@@ -11,7 +12,7 @@ import java.time.LocalDate;
  * @Version 1.0
  **/
 @Data
-public class User {
+public class User implements Serializable {
     private Integer id;
     private String account;
     private String password;
