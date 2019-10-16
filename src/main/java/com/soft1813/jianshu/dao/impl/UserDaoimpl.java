@@ -36,4 +36,11 @@ public class UserDaoimpl implements UserDao {
         );
         return (int) id;
     }
+
+    @Override
+    public int deleteUserById(int id) throws SQLException {
+        return Db.use().del(
+                Entity.create("t_user").set("id",id)
+        );
+    }
 }

@@ -17,6 +17,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.sql.SQLOutput;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.concurrent.locks.Lock;
@@ -96,6 +97,31 @@ public class UserController extends HttpServlet  {
         out.print(gson.toJson(ro));
         out.close();
 
+    }
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        //获得前端传递的id参数
+        String id= req.getParameter("id");
+        System.out.println(id);
+        //受影响的记录行数
+        int n=0;
+        try {
+            //根据id删除用户，返回受影响的记录行数
+            n=DaoFactory.getUserDaoInstance().deleteUserById(Integer.parseInt(id));
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        int code=resp.getStatus();
+        String msg= n==1?"成功":"失败";
+        //生产无返回数据的响应对象
+        ResponseObject ro=ResponseObject.success(code,msg);
+        Gson gson=new GsonBuilder().create();
+        resp.setContentType("application/json;charset=utf-8");
+        PrintWriter out=resp.getWriter();
+        out.print(gson.toJson(ro));
+        out.close();
     }
 }
 

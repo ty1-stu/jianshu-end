@@ -26,4 +26,5 @@ public interface UserDao {
 
  */
   int insertUser(User user) throws SQLException;
+  int deleteUserById(int id)throws SQLException;
 }

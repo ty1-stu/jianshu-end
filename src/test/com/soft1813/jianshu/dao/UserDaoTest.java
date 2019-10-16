@@ -32,4 +32,10 @@ public class UserDaoTest {
         int id=userDao.insertUser(user);
         System.out.println(id);
     }
+
+    @Test
+    public void deleteUserById() throws SQLException{
+     int n=userDao.deleteUserById(37);
+     assertEquals( 1,n);
+    }
 }
